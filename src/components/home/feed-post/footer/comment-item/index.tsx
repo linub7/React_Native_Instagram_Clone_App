@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -7,15 +7,12 @@ import {fontWeights} from '@utils/fonts';
 
 interface Props {
   username: string;
-  isLiked: boolean;
   comment: string;
 }
 
-const PostFeedFooterCommentItem: FC<Props> = ({
-  username,
-  isLiked = false,
-  comment,
-}) => {
+const PostFeedFooterCommentItem: FC<Props> = ({username, comment}) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const toggleIsLike = () => setIsLiked(prev => !prev);
   return (
     <View style={styles.comment}>
       <Text style={styles.commentText}>
@@ -24,7 +21,8 @@ const PostFeedFooterCommentItem: FC<Props> = ({
       <AntDesign
         name={isLiked ? 'heart' : 'hearto'}
         style={styles.icon}
-        color={colors.black}
+        color={isLiked ? colors.accent : colors.black}
+        onPress={toggleIsLike}
       />
     </View>
   );

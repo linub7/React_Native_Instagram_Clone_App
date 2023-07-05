@@ -1,19 +1,15 @@
-import {FC, useState} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {FC} from 'react';
+import {View, StyleSheet} from 'react-native';
 
-import FeedPost from '@components/home/feed-post';
-import {posts} from '@assets/data/posts';
+import HomeScreen from '@screens/home';
 
 interface Props {}
 
 const App: FC<Props> = () => {
-  const [isLiked, setIsLiked] = useState(false);
   return (
-    <ScrollView style={styles.container}>
-      {posts?.map((item, index) => (
-        <FeedPost key={index} item={item} />
-      ))}
-    </ScrollView>
+    <View style={styles.container}>
+      <HomeScreen />
+    </View>
   );
 };
 

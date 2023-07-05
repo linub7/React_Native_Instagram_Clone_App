@@ -1,15 +1,10 @@
 import {FC, useState} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 
-import {colors} from '@utils/colors';
-import {fontWeights} from '@utils/fonts';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
 import {Post} from 'src/@types/post';
 import FeedPostHeader from './header';
 import PostFeedFooter from './footer';
+import DoublePressable from './shared/pressables/double';
 
 interface Props {
   item: Post;
@@ -17,26 +12,31 @@ interface Props {
 
 const FeedPost: FC<Props> = ({item}) => {
   const [isLiked, setIsLiked] = useState(false);
+  const toggleIsLike = () => setIsLiked(prev => !prev);
+
   return (
     <View style={styles.container}>
       <FeedPostHeader
         userImage={item?.user?.image}
         username={item?.user?.username}
       />
-      <Image
-        source={{
-          uri: item?.image,
-        }}
-        style={styles.image}
-      />
+      <DoublePressable onDoublePress={toggleIsLike}>
+        <Image
+          source={{
+            uri: item?.image,
+          }}
+          style={styles.image}
+        />
+      </DoublePressable>
       <PostFeedFooter
         comments={item?.comments}
         createdAt={item?.createdAt}
         description={item?.description}
-        isLiked={isLiked}
         nofComments={item?.nofComments}
         nofLikes={item?.nofLikes}
         username={item?.user?.username}
+        isLiked={isLiked}
+        toggleIsLike={toggleIsLike}
       />
     </View>
   );

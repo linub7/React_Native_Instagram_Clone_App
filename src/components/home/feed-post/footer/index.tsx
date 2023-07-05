@@ -1,5 +1,5 @@
-import {FC} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {FC, useState} from 'react';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -10,33 +10,41 @@ import {Comment} from 'src/@types/post';
 import PostFeedFooterCommentItem from './comment-item';
 
 interface Props {
-  isLiked: boolean;
   nofLikes: number;
   username: string;
   description: string;
   nofComments: number;
   comments: Comment[];
   createdAt: string;
+  isLiked: boolean;
+  toggleIsLike?(): void;
 }
 
 const PostFeedFooter: FC<Props> = ({
-  isLiked = false,
   nofLikes,
   username,
   description,
   nofComments,
   comments,
   createdAt,
+  isLiked,
+  toggleIsLike,
 }) => {
+  const [isShowMore, setIsShowMore] = useState(false);
+
+  const toggleShowMore = () => setIsShowMore(prev => !prev);
+
   return (
     <View style={styles.footer}>
       <View style={styles.iconContainer}>
-        <AntDesign
-          name={isLiked ? 'heart' : 'hearto'}
-          size={24}
-          style={styles.icon}
-          color={colors.black}
-        />
+        <Pressable onPress={toggleIsLike}>
+          <AntDesign
+            name={isLiked ? 'heart' : 'hearto'}
+            size={24}
+            style={styles.icon}
+            color={isLiked ? colors.accent : colors.black}
+          />
+        </Pressable>
         <Ionicons
           name="chatbubble-outline"
           size={24}
@@ -63,15 +71,16 @@ const PostFeedFooter: FC<Props> = ({
         &nbsp;and&nbsp;
         <Text style={styles.boldText}>{nofLikes} others</Text>
       </Text>
-      <Text style={styles.text}>
+
+      <Text style={styles.text} numberOfLines={isShowMore ? 0 : 3}>
         <Text style={styles.boldText}>{username}</Text>&nbsp; {description}
       </Text>
+      <Text onPress={toggleShowMore}>{isShowMore ? 'less' : 'more'}</Text>
       <Text>View all {nofComments} comments</Text>
       {comments?.map((el, index) => (
         <PostFeedFooterCommentItem
           username={el.user?.username}
           comment={el.comment}
-          isLiked={isLiked}
           key={index}
         />
       ))}
