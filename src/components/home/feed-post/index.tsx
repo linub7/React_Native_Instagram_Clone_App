@@ -4,7 +4,8 @@ import {Image, StyleSheet, View} from 'react-native';
 import {Post} from 'src/@types/post';
 import FeedPostHeader from './header';
 import PostFeedFooter from './footer';
-import DoublePressable from './shared/pressables/double';
+import DoublePressable from '@components/shared/pressables/double';
+import CustomCarousel from '@components/shared/carousel';
 
 interface Props {
   item: Post;
@@ -21,12 +22,16 @@ const FeedPost: FC<Props> = ({item}) => {
         username={item?.user?.username}
       />
       <DoublePressable onDoublePress={toggleIsLike}>
-        <Image
-          source={{
-            uri: item?.image,
-          }}
-          style={styles.image}
-        />
+        {item.image ? (
+          <Image
+            source={{
+              uri: item?.image,
+            }}
+            style={styles.image}
+          />
+        ) : item?.images ? (
+          <CustomCarousel images={item?.images} />
+        ) : null}
       </DoublePressable>
       <PostFeedFooter
         comments={item?.comments}
