@@ -6,8 +6,8 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import {colors} from '@utils/colors';
 import {fontWeights} from '@utils/fonts';
-import {Comment} from 'src/@types/post';
-import PostFeedFooterCommentItem from './comment-item';
+import {Comment} from 'src/@types/comment';
+import CommentItem from '@components/shared/comment-item';
 
 interface Props {
   nofLikes: number;
@@ -78,11 +78,7 @@ const PostFeedFooter: FC<Props> = ({
       <Text onPress={toggleShowMore}>{isShowMore ? 'less' : 'more'}</Text>
       <Text>View all {nofComments} comments</Text>
       {comments?.map((el, index) => (
-        <PostFeedFooterCommentItem
-          username={el.user?.username}
-          comment={el.comment}
-          key={index}
-        />
+        <CommentItem comment={el} key={index} />
       ))}
       <Text>{createdAt}</Text>
     </View>
