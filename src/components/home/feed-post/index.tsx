@@ -6,12 +6,14 @@ import FeedPostHeader from './header';
 import PostFeedFooter from './footer';
 import DoublePressable from '@components/shared/pressables/double';
 import CustomCarousel from '@components/shared/carousel';
+import CustomVideoPlayer from '@components/shared/video-player';
 
 interface Props {
   item: Post;
+  isVisible: boolean;
 }
 
-const FeedPost: FC<Props> = ({item}) => {
+const FeedPost: FC<Props> = ({item, isVisible}) => {
   const [isLiked, setIsLiked] = useState(false);
   const toggleIsLike = () => setIsLiked(prev => !prev);
 
@@ -31,6 +33,8 @@ const FeedPost: FC<Props> = ({item}) => {
           />
         ) : item?.images ? (
           <CustomCarousel images={item?.images} />
+        ) : item?.video ? (
+          <CustomVideoPlayer uri={item?.video} paused={!isVisible} />
         ) : null}
       </DoublePressable>
       <PostFeedFooter
