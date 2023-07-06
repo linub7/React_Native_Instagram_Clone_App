@@ -8,8 +8,8 @@ export interface Post {
   images?: string[];
   video?: string;
   description: string;
-  user: User;
-  nofComments: number;
-  nofLikes: number;
-  comments: Comment[];
+  user?: User;
+  nofComments?: number;
+  nofLikes?: number;
+  comments?: Comment[];
 }
