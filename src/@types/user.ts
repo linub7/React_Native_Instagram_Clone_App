@@ -9,3 +9,6 @@ export interface User {
   posts?: Post[];
   website?: string;
 }
+
+export type EditableUserFields = 'name' | 'username' | 'website' | 'bio';
+export type EditableUser = Pick<User, EditableUserFields>;

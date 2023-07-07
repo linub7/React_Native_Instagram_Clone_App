@@ -4,6 +4,7 @@ import {View, StyleSheet} from 'react-native';
 import HomeScreen from '@screens/home';
 import CommentsScreen from '@screens/comments';
 import ProfileScreen from '@screens/profile';
+import EditProfileScreen from '@screens/edit-profile';
 
 interface Props {}
 
@@ -12,7 +13,8 @@ const App: FC<Props> = () => {
     <View style={styles.container}>
       {/* <HomeScreen /> */}
       {/* <CommentsScreen /> */}
-      <ProfileScreen />
+      {/* <ProfileScreen /> */}
+      <EditProfileScreen />
     </View>
   );
 };
