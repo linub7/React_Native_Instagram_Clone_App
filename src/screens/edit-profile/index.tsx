@@ -1,6 +1,7 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useForm} from 'react-hook-form';
+import {Asset, launchImageLibrary} from 'react-native-image-picker';
 
 import {user} from '@assets/data/user';
 import EditProfileScreenChangeProfileImage from '@components/edit-profile/change-profile-image';
@@ -13,6 +14,7 @@ import {URL_REGEX} from '@utils/constants';
 interface Props {}
 
 const EditProfileScreen: FC<Props> = props => {
+  const [selectedPhoto, setSelectedPhoto] = useState<Asset | null>(null);
   const {control, handleSubmit} = useForm<EditableUser>({
     defaultValues: {
       name: user.name,
@@ -22,11 +24,26 @@ const EditProfileScreen: FC<Props> = props => {
     },
   });
 
+  const handleChangeImage = async () => {
+    launchImageLibrary(
+      {mediaType: 'photo'},
+      ({didCancel, errorCode, errorMessage, assets}) => {
+        if (!didCancel && !errorCode && assets && assets.length > 0) {
+          setSelectedPhoto(assets[0]);
+        }
+      },
+    );
+  };
+
   const onSubmit = (data: EditableUser) => console.log(data);
 
   return (
     <View style={styles.container}>
-      <EditProfileScreenChangeProfileImage image={user?.image} />
+      <EditProfileScreenChangeProfileImage
+        onPress={handleChangeImage}
+        image={user?.image}
+        uri={selectedPhoto?.uri}
+      />
       <CustomInput
         control={control}
         label="Name"

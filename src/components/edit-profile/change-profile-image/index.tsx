@@ -6,13 +6,21 @@ import {fontSizes, fontWeights} from '@utils/fonts';
 
 interface Props {
   image?: string;
+  onPress?(): void;
+  uri?: string;
 }
 
-const EditProfileScreenChangeProfileImage: FC<Props> = ({image}) => {
+const EditProfileScreenChangeProfileImage: FC<Props> = ({
+  image,
+  uri,
+  onPress,
+}) => {
   return (
     <>
-      <Image source={{uri: image}} style={styles.avatar} />
-      <Text style={styles.text}>Change Profile Photo</Text>
+      <Image source={{uri: uri || image}} style={styles.avatar} />
+      <Text onPress={onPress} style={styles.text}>
+        Change Profile Photo
+      </Text>
     </>
   );
 };
