@@ -67,3 +67,7 @@ yarn-error.log
 
 .vscode/
 .env
+# Expo
+.expo
+dist/
+web-build/

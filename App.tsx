@@ -5,6 +5,7 @@ import HomeScreen from '@screens/home';
 import CommentsScreen from '@screens/comments';
 import ProfileScreen from '@screens/profile';
 import EditProfileScreen from '@screens/edit-profile';
+import PostUploadScreen from '@screens/post-upload';
 
 interface Props {}
 
@@ -14,7 +15,8 @@ const App: FC<Props> = () => {
       {/* <HomeScreen /> */}
       {/* <CommentsScreen /> */}
       {/* <ProfileScreen /> */}
-      <EditProfileScreen />
+      {/* <EditProfileScreen /> */}
+      <PostUploadScreen />
     </View>
   );
 };
