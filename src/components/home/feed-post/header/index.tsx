@@ -1,16 +1,25 @@
 import {FC} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 import {colors} from '@utils/colors';
 import {fontWeights} from '@utils/fonts';
+import {FeedStackParamList} from 'src/@types/navigation';
 
 interface Props {
   userImage?: string;
-  username: string;
+  username?: string;
+  userId?: string;
 }
 
-const FeedPostHeader: FC<Props> = ({userImage, username}) => {
+const FeedPostHeader: FC<Props> = ({userImage, username, userId}) => {
+  const {navigate} = useNavigation<NavigationProp<FeedStackParamList>>();
+
+  const handleNavigate = () => {
+    if (!userId) return;
+    navigate('user-profile', {userId});
+  };
   return (
     <View style={styles.header}>
       <Image
@@ -19,7 +28,9 @@ const FeedPostHeader: FC<Props> = ({userImage, username}) => {
         }}
         style={styles.userAvatar}
       />
-      <Text style={styles.userName}>{username}</Text>
+      <Text onPress={handleNavigate} style={styles.userName}>
+        {username}
+      </Text>
       <Entypo name="dots-three-horizontal" size={16} style={styles.threeDots} />
     </View>
   );

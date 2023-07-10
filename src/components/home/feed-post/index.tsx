@@ -22,6 +22,7 @@ const FeedPost: FC<Props> = ({item, isVisible}) => {
       <FeedPostHeader
         userImage={item?.user?.image}
         username={item?.user?.username}
+        userId={item?.user?.id}
       />
       <DoublePressable onDoublePress={toggleIsLike}>
         {item.image ? (

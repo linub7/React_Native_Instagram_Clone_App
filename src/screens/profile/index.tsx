@@ -3,6 +3,7 @@ import {FC} from 'react';
 import FeedGridView from '@components/shared/feed-grid-view';
 import {user} from '@assets/data/user';
 import ListHeaderComponent from '@components/profile/list-header';
+import {useRoute} from '@react-navigation/native';
 
 interface Props {}
 

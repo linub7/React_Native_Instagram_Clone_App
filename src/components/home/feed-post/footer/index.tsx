@@ -10,12 +10,12 @@ import {Comment} from 'src/@types/comment';
 import CommentItem from '@components/shared/comment-item';
 
 interface Props {
-  nofLikes: number;
-  username: string;
-  description: string;
-  nofComments: number;
-  comments: Comment[];
-  createdAt: string;
+  nofLikes?: number;
+  username?: string;
+  description?: string;
+  nofComments?: number;
+  comments?: Comment[];
+  createdAt?: string;
   isLiked: boolean;
   toggleIsLike?(): void;
 }
@@ -27,7 +27,7 @@ const PostFeedFooter: FC<Props> = ({
   nofComments,
   comments,
   createdAt,
-  isLiked,
+  isLiked = false,
   toggleIsLike,
 }) => {
   const [isShowMore, setIsShowMore] = useState(false);
