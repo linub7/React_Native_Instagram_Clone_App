@@ -39,6 +39,7 @@ const FeedPost: FC<Props> = ({item, isVisible}) => {
         ) : null}
       </DoublePressable>
       <PostFeedFooter
+        id={item?.id}
         comments={item?.comments}
         createdAt={item?.createdAt}
         description={item?.description}

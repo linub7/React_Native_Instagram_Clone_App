@@ -8,6 +8,8 @@ import {useRoute} from '@react-navigation/native';
 interface Props {}
 
 const ProfileScreen: FC<Props> = props => {
+  const route = useRoute();
+
   return (
     <FeedGridView
       data={user?.posts}

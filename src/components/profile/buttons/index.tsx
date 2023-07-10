@@ -2,19 +2,25 @@ import {FC} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import CustomPressableButton from '@components/shared/pressables/button';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {ProfileStackParamList} from 'src/@types/navigation';
 
 interface Props {}
 
 const ProfileScreenButtons: FC<Props> = props => {
-  const {goBack} = useNavigation();
+  const {goBack, navigate} =
+    useNavigation<NavigationProp<ProfileStackParamList>>();
+
+  const handleNavigateToEditProfile = () =>
+    navigate('edit-profile', {userId: undefined});
+
   return (
     <View style={styles.container}>
       <CustomPressableButton
         label="Edit Profile"
-        onPress={() => console.log('edit button')}
+        onPress={handleNavigateToEditProfile}
       />
-      <CustomPressableButton label="Another Button" onPress={() => goBack()} />
+      <CustomPressableButton label="Go Back" onPress={() => goBack()} />
     </View>
   );
 };

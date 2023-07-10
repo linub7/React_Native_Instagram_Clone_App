@@ -1,5 +1,6 @@
 import {FC, useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -8,6 +9,7 @@ import {colors} from '@utils/colors';
 import {fontWeights} from '@utils/fonts';
 import {Comment} from 'src/@types/comment';
 import CommentItem from '@components/shared/comment-item';
+import {RootStackParamList} from 'src/@types/navigation';
 
 interface Props {
   nofLikes?: number;
@@ -17,6 +19,7 @@ interface Props {
   comments?: Comment[];
   createdAt?: string;
   isLiked: boolean;
+  id: string;
   toggleIsLike?(): void;
 }
 
@@ -28,10 +31,14 @@ const PostFeedFooter: FC<Props> = ({
   comments,
   createdAt,
   isLiked = false,
-  toggleIsLike,
+  id,
+  toggleIsLike = () => {},
 }) => {
   const [isShowMore, setIsShowMore] = useState(false);
 
+  const {navigate} = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const handleNavigateToComments = () => navigate('comments', {postId: id});
   const toggleShowMore = () => setIsShowMore(prev => !prev);
 
   return (
@@ -76,7 +83,9 @@ const PostFeedFooter: FC<Props> = ({
         <Text style={styles.boldText}>{username}</Text>&nbsp; {description}
       </Text>
       <Text onPress={toggleShowMore}>{isShowMore ? 'less' : 'more'}</Text>
-      <Text>View all {nofComments} comments</Text>
+      <Text onPress={handleNavigateToComments}>
+        View all {nofComments} comments
+      </Text>
       {comments?.map((el, index) => (
         <CommentItem comment={el} key={index} />
       ))}

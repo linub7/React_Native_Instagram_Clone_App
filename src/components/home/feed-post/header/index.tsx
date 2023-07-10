@@ -5,7 +5,7 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 import {colors} from '@utils/colors';
 import {fontWeights} from '@utils/fonts';
-import {FeedStackParamList} from 'src/@types/navigation';
+import {HomeStackParamList} from 'src/@types/navigation';
 
 interface Props {
   userImage?: string;
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const FeedPostHeader: FC<Props> = ({userImage, username, userId}) => {
-  const {navigate} = useNavigation<NavigationProp<FeedStackParamList>>();
+  const {navigate} = useNavigation<NavigationProp<HomeStackParamList>>();
 
   const handleNavigate = () => {
     if (!userId) return;

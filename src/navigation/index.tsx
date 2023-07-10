@@ -3,9 +3,8 @@ import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import HomeScreen from '@screens/home';
-import ProfileScreen from '@screens/profile';
-import HeaderTitle from '@components/shared/header-title';
+import BottomTabNavigator from './bottom-tabs';
+import CommentsScreen from '@screens/comments';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,18 +14,14 @@ const AppNavigator: FC<Props> = props => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="feed"
+        initialRouteName="home"
         screenOptions={{headerShown: true}}>
         <Stack.Screen
-          name="feed"
-          component={HomeScreen}
-          options={{headerTitle: HeaderTitle, headerTitleAlign: 'center'}}
+          name="home"
+          component={BottomTabNavigator}
+          options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="user-profile"
-          component={ProfileScreen}
-          options={{headerTitle: 'Profile'}}
-        />
+        <Stack.Screen name="comments" component={CommentsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
