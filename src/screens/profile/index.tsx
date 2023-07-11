@@ -22,6 +22,8 @@ const ProfileScreen: FC<Props> = props => {
 
   const userId = route?.params?.userId;
 
+  console.log('userId: ', userId);
+
   return (
     <FeedGridView
       data={user?.posts}

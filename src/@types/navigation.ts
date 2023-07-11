@@ -1,5 +1,5 @@
-import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {RouteProp} from '@react-navigation/native';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type HomeStackParamList = {
@@ -20,6 +20,11 @@ export type BottomTabStackParamList = {
   upload: undefined;
   notifications: undefined;
   'my-profile': undefined;
+};
+
+export type SearchTabStackParamList = {
+  users: undefined;
+  posts: undefined;
 };
 
 export type RootStackParamList = {

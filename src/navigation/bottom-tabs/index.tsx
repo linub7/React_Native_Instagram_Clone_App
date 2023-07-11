@@ -11,6 +11,7 @@ import {colors} from '@utils/colors';
 import HomeStackNavigator from '../home-stack';
 import ProfileStackNavigator from '../profile-stack';
 import {BottomTabStackParamList} from 'src/@types/navigation';
+import SearchTabNavigator from '../search-tabs';
 
 interface Props {}
 
@@ -35,9 +36,9 @@ const BottomTabNavigator: FC<Props> = props => {
       />
       <Tab.Screen
         name="search"
-        component={SearchScreen}
+        component={SearchTabNavigator}
         options={{
-          headerTitle: 'Search',
+          headerShown: false,
           tabBarIcon: ({color, size}) => (
             <MaterialIcons name="search" color={color} size={size} />
           ),
