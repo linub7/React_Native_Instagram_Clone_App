@@ -8,10 +8,12 @@ import {ProfileStackParamList} from 'src/@types/navigation';
 interface Props {}
 
 const ProfileScreenButtons: FC<Props> = props => {
-  const {goBack, navigate} =
-    useNavigation<NavigationProp<ProfileStackParamList>>();
+  const {navigate} = useNavigation<NavigationProp<ProfileStackParamList>>();
 
   const handleNavigateToEditProfile = () => navigate('edit-profile');
+  const handleSignout = () => {
+    console.log('sign out');
+  };
 
   return (
     <View style={styles.container}>
@@ -19,7 +21,7 @@ const ProfileScreenButtons: FC<Props> = props => {
         label="Edit Profile"
         onPress={handleNavigateToEditProfile}
       />
-      <CustomPressableButton label="Go Back" onPress={() => goBack()} />
+      <CustomPressableButton label="Sign out" onPress={handleSignout} />
     </View>
   );
 };

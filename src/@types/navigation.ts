@@ -28,10 +28,19 @@ export type SearchTabStackParamList = {
 };
 
 export type RootStackParamList = {
+  auth: undefined;
   home: undefined;
   comments: {
     postId: string;
   };
+};
+
+export type AuthStackNavigatorParamList = {
+  'sign-in': undefined;
+  'sign-up': undefined;
+  'confirm-email': {username?: string};
+  'forgot-password': undefined;
+  'new-password': undefined;
 };
 
 export type MyProfileNavigationProp = BottomTabNavigationProp<
