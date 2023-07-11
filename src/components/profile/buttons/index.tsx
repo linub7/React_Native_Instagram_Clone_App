@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 import CustomPressableButton from '@components/shared/pressables/button';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {ProfileStackParamList} from 'src/@types/navigation';
 
 interface Props {}
@@ -11,8 +11,7 @@ const ProfileScreenButtons: FC<Props> = props => {
   const {goBack, navigate} =
     useNavigation<NavigationProp<ProfileStackParamList>>();
 
-  const handleNavigateToEditProfile = () =>
-    navigate('edit-profile', {userId: undefined});
+  const handleNavigateToEditProfile = () => navigate('edit-profile');
 
   return (
     <View style={styles.container}>

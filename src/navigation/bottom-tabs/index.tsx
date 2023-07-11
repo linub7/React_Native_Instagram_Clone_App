@@ -10,10 +10,11 @@ import NotificationScreen from '@screens/notification';
 import {colors} from '@utils/colors';
 import HomeStackNavigator from '../home-stack';
 import ProfileStackNavigator from '../profile-stack';
+import {BottomTabStackParamList} from 'src/@types/navigation';
 
 interface Props {}
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabStackParamList>();
 
 const BottomTabNavigator: FC<Props> = props => {
   return (
@@ -71,7 +72,7 @@ const BottomTabNavigator: FC<Props> = props => {
         }}
       />
       <Tab.Screen
-        name="profile-stack"
+        name="my-profile"
         component={ProfileStackNavigator}
         options={{
           headerShown: false,

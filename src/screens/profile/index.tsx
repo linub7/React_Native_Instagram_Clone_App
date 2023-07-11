@@ -1,14 +1,26 @@
 import {FC} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 import FeedGridView from '@components/shared/feed-grid-view';
 import {user} from '@assets/data/user';
 import ListHeaderComponent from '@components/profile/list-header';
-import {useRoute} from '@react-navigation/native';
+import {
+  MyProfileNavigationProp,
+  MyProfileRouteProp,
+  UserProfileNavigationProp,
+  UserProfileRouteProp,
+} from 'src/@types/navigation';
 
 interface Props {}
 
 const ProfileScreen: FC<Props> = props => {
-  const route = useRoute();
+  const route = useRoute<UserProfileRouteProp | MyProfileRouteProp>();
+
+  const {navigate} = useNavigation<
+    UserProfileNavigationProp | MyProfileNavigationProp
+  >();
+
+  const userId = route?.params?.userId;
 
   return (
     <FeedGridView
